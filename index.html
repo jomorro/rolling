@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function changePic(myrune1) {
+            var randomdice = Math.floor(Math.random() * 6)
+            document.images[myrune1].src = "face" + Number(randomdice + 1) + ".jpg"
+            return randomdice + 1
+        }
+
+        function roll() {
+            count = new Array()
+            res = ""
+            num = document.getElementById("rollNum").value
+            for (i = 0; i < 12; i++) {
+                count[i] = 0
+            }
+            for (i = 0; i < num; i++) {
+                d1 = changePic("myrune1")
+                d2 = changePic("myrune2")
+                poss = d1 + d2
+                count[poss - 2] += 1
+                res += Number(i + 1) + ": " + d1 + d2 + "<br>"
+            }
+            result.innerHTML = res
+            res = ""
+            for (i = 0; i < 11; i++) {
+                res += "The Sum of " + Number(i + 2) + " occurred :" + count[i] + " Times<br>"
+            }
+            possTable.innerHTML = res
+        }
+    </script>
+
+</head>
+
+<body>
+    <table border="0" bordercolor="#000000" summary="">
+        <tr>
+            <td>
+                <img src="d1.gif" name="myrune1">
+                <form>
+                    <input type="button" value="Roll dice 1" onclick="changePic('myrune1')">
+                </form>
+            </td>
+            <td>
+                <img src="d2.gif" name="myrune2">
+                <form>
+                    <input type="button" value="Roll dice 2" onclick="changePic('myrune2')">
+                </form>
+            </td>
+        </tr>
+    </table>
+    <input onclick="roll()" name="Button1" type="button" value="roll" style="width: 117px">
+    <input id="rollNum" type="text" value="10">
+    <div id="result">
+    </div>
+    <div id="possTable"></div>
+</body>
+
+</html>
